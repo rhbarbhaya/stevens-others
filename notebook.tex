@@ -1,0 +1,1223 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{User Based Movie Recommendation System}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{user-based-movie-recommendation-system}{%
+\section{User Based Movie Recommendation
+System}\label{user-based-movie-recommendation-system}}
+
+    Since the birth of cinemas till now. There have been a lot of
+modifications. From the First Short Clippings, then sound, then colour
+and now we enjoy 3D cinemas and wonder about the next big thing. We have
+so many options that we are often confused and constantly rely on
+friends or AI to recommend us some movies.
+
+    In this notebook I have attempted to make a Unique User Based Movie
+Recommendation System with a little bit of predictive modeling.
+
+    Prediction requires user input and this being a final project, I
+couldn't gather much data. So I found a dataset which has recorded user
+inputs and has a large enough dataset to perform the predictive model
+on.
+
+    Dataset can be found
+\href{https://www.kaggle.com/rounakbanik/the-movies-dataset}{here}
+
+    Some information and warnings \textbf{Author:} Rushabh Barbhaya
+\textbf{Guided by:} Dr.~Carlo Lipizzi
+
+\textbf{Subject:} EM624 \textgreater{} Informatics for Engineering
+Management
+
+\textbf{Project Topic:} Movie Recommendation System Dataset: The Movies
+Dataset \textgreater{} link -\textgreater{}
+https://www.kaggle.com/rounakbanik/the-movies-dataset \textgreater{}
+Dataset size -\textgreater{} 990mb (7 csv files / 5 used) \textgreater{}
+csv1: \textgreater{} Name: movies\_metadata.csv \textgreater{} entries:
+45466 x 24 data entries csv2: Name: credits.csv entries: 25476 x 3 data
+entries csv3: Name: keywords.csv entires: 46419 x 2 data entries csv4:
+Name: links\_small.csv entries: 9112 entries csv5: Name: ratings.csv
+entries: 100004 x 4 entries
+
+\textbf{Features: - User Based Search Recommendation - Provides chart
+toppers for the movie entered - Provides data story - Describes the
+movie selected}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\textbf{Requirements:} Microsoft Visual Studio v14+ \textbf{Warnings:}
+Computational Heavy Code ***
+
+\textbf{Limitations:} Couldn't run the code on whole dataset due to lack
+of computational power.
+
+    Importing all the necessary libraries
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{import} \PY{n+nn}{time}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{from} \PY{n+nn}{ast} \PY{k}{import} \PY{n}{literal\PYZus{}eval}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{wordcloud} \PY{k}{import} \PY{n}{WordCloud}\PY{p}{,} \PY{n}{STOPWORDS}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{plotly}
+        \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{offline} \PY{k}{as} \PY{n+nn}{py}
+        \PY{n}{py}\PY{o}{.}\PY{n}{init\PYZus{}notebook\PYZus{}mode}\PY{p}{(}\PY{n}{connected}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{graph\PYZus{}objs} \PY{k}{as} \PY{n+nn}{go}
+        \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{tools} \PY{k}{as} \PY{n+nn}{tls}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns} 
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}extraction}\PY{n+nn}{.}\PY{n+nn}{text} \PY{k}{import} \PY{n}{TfidfVectorizer}\PY{p}{,} \PY{n}{CountVectorizer}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics}\PY{n+nn}{.}\PY{n+nn}{pairwise} \PY{k}{import} \PY{n}{linear\PYZus{}kernel}\PY{p}{,} \PY{n}{cosine\PYZus{}similarity}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{stem}\PY{n+nn}{.}\PY{n+nn}{snowball} \PY{k}{import} \PY{n}{SnowballStemmer}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{stem}\PY{n+nn}{.}\PY{n+nn}{wordnet} \PY{k}{import} \PY{n}{WordNetLemmatizer}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{corpus} \PY{k}{import} \PY{n}{wordnet}
+        \PY{k+kn}{from} \PY{n+nn}{surprise} \PY{k}{import} \PY{n}{Reader}\PY{p}{,} \PY{n}{Dataset}\PY{p}{,} \PY{n}{SVD}\PY{p}{,} \PY{n}{evaluate}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image}\PY{p}{,} \PY{n}{HTML}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ignore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plotly}\PY{o}{.}\PY{n}{tools}\PY{o}{.}\PY{n}{set\PYZus{}credentials\PYZus{}file}\PY{p}{(}\PY{n}{username}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rounakbanik}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{api\PYZus{}key}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xTLaHBy9MVv5szF4Pwan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set\PYZus{}style}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{whitegrid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{font\PYZus{}scale}\PY{o}{=}\PY{l+m+mf}{1.25}\PY{p}{)}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}colwidth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    Importing all the datasets and removing the rows which are causing
+runtime errors
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{dataset} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{movies\PYZus{}metadata.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{dataset} \PY{o}{=} \PY{n}{dataset}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{19730}\PY{p}{,} \PY{l+m+mi}{29503}\PY{p}{,} \PY{l+m+mi}{35587}\PY{p}{]}\PY{p}{)}
+        \PY{n}{credit} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{credits.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{keywords} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keywords.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{links} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{links\PYZus{}small.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ratings} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ratings\PYZus{}small.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Cleaning and sorting the dataset
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{str}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{overview}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{overview}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{str}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revenue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revenue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{errors} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{coerce}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revenue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revenue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}dataset[\PYZdq{}revenue\PYZdq{}] = dataset[\PYZdq{}revenue\PYZdq{}].astype(\PYZdq{}int\PYZdq{})}
+        \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{budget}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{budget}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{errors} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{coerce}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{budget}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{budget}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{)} 
+        \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{return}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revenue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{/} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{budget}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{release\PYZus{}date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{errors} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{coerce}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{if} \PY{n}{x} \PY{o}{!=} \PY{n}{np}\PY{o}{.}\PY{n}{nan} \PY{k}{else} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{)} \PY{c+c1}{\PYZsh{} Creating a year column to check the year of release}
+        \PY{n}{poster\PYZus{}url} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{http://image.tmdb.org/t/p/w185}\PY{l+s+s2}{\PYZdq{}} \PY{c+c1}{\PYZsh{} Heading for movie Poster}
+        \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{poster\PYZus{}path}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZlt{}img src=}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{poster\PYZus{}url} \PY{o}{+} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{poster\PYZus{}path}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{style=}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{height:100px;}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZgt{}}\PY{l+s+s2}{\PYZdq{}} \PY{c+c1}{\PYZsh{} Adding Path for movie poster \PYZhy{} Viz works best in Jupyter Notebook}
+        \PY{n}{links} \PY{o}{=} \PY{n}{links}\PY{p}{[}\PY{n}{links}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tmdbId}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{notnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tmdbId}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    From here we are exploring the dataset. Checking the dataset to see if
+more cleaning is required
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{dataset}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}    adult                              belongs\_to\_collection      budget  \textbackslash{}
+        0  False  \{'id': 10194, 'name': 'Toy Story Collection', {\ldots}  30000000.0   
+        1  False                                                NaN  65000000.0   
+        2  False  \{'id': 119050, 'name': 'Grumpy Old Men Collect{\ldots}         NaN   
+        3  False                                                NaN  16000000.0   
+        4  False  \{'id': 96871, 'name': 'Father of the Bride Col{\ldots}         NaN   
+        
+                                                      genres  \textbackslash{}
+        0  [\{'id': 16, 'name': 'Animation'\}, \{'id': 35, '{\ldots}   
+        1  [\{'id': 12, 'name': 'Adventure'\}, \{'id': 14, '{\ldots}   
+        2  [\{'id': 10749, 'name': 'Romance'\}, \{'id': 35, {\ldots}   
+        3  [\{'id': 35, 'name': 'Comedy'\}, \{'id': 18, 'nam{\ldots}   
+        4                     [\{'id': 35, 'name': 'Comedy'\}]   
+        
+                                       homepage     id    imdb\_id original\_language  \textbackslash{}
+        0  http://toystory.disney.com/toy-story    862  tt0114709                en   
+        1                                   NaN   8844  tt0113497                en   
+        2                                   NaN  15602  tt0113228                en   
+        3                                   NaN  31357  tt0114885                en   
+        4                                   NaN  11862  tt0113041                en   
+        
+                        original\_title  \textbackslash{}
+        0                    Toy Story   
+        1                      Jumanji   
+        2             Grumpier Old Men   
+        3            Waiting to Exhale   
+        4  Father of the Bride Part II   
+        
+                                                    overview  {\ldots}  runtime  \textbackslash{}
+        0  Led by Woody, Andy's toys live happily in his {\ldots}  {\ldots}     81.0   
+        1  When siblings Judy and Peter discover an encha{\ldots}  {\ldots}    104.0   
+        2  A family wedding reignites the ancient feud be{\ldots}  {\ldots}    101.0   
+        3  Cheated on, mistreated and stepped on, the wom{\ldots}  {\ldots}    127.0   
+        4  Just when George Banks has recovered from his {\ldots}  {\ldots}    106.0   
+        
+                                            spoken\_languages    status  \textbackslash{}
+        0           [\{'iso\_639\_1': 'en', 'name': 'English'\}]  Released   
+        1  [\{'iso\_639\_1': 'en', 'name': 'English'\}, \{'iso{\ldots}  Released   
+        2           [\{'iso\_639\_1': 'en', 'name': 'English'\}]  Released   
+        3           [\{'iso\_639\_1': 'en', 'name': 'English'\}]  Released   
+        4           [\{'iso\_639\_1': 'en', 'name': 'English'\}]  Released   
+        
+                                                     tagline  \textbackslash{}
+        0                                                NaN   
+        1          Roll the dice and unleash the excitement!   
+        2  Still Yelling. Still Fighting. Still Ready for{\ldots}   
+        3  Friends are the people who let you be yourself{\ldots}   
+        4  Just When His World Is Back To Normal{\ldots} He's {\ldots}   
+        
+                                 title  video  vote\_average vote\_count     return  \textbackslash{}
+        0                    Toy Story  False           7.7     5415.0  12.451801   
+        1                      Jumanji  False           6.9     2413.0   4.043035   
+        2             Grumpier Old Men  False           6.5       92.0        NaN   
+        3            Waiting to Exhale  False           6.1       34.0   5.090760   
+        4  Father of the Bride Part II  False           5.7      173.0        NaN   
+        
+           year  
+        0  1995  
+        1  1995  
+        2  1995  
+        3  1995  
+        4  1995  
+        
+        [5 rows x 26 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{title\PYZus{}wc} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{title\PYZus{}wordcloud} \PY{o}{=} \PY{n}{WordCloud}\PY{p}{(}\PY{n}{stopwords} \PY{o}{=} \PY{n}{STOPWORDS}\PY{p}{,} \PY{n}{background\PYZus{}color} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{white}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{height} \PY{o}{=} \PY{l+m+mi}{2000}\PY{p}{,} \PY{n}{width} \PY{o}{=} \PY{l+m+mi}{4000}\PY{p}{)}\PY{o}{.}\PY{n}{generate}\PY{p}{(}\PY{n}{title\PYZus{}wc}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{title\PYZus{}wordcloud}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{off}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wordcloud of Movie Titles}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The words ``Man'', ``Girl'' \& ``Love'' appears to be a lot in the movie
+titles. More cleaning is required to understand the data
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{production\PYZus{}countries}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{production\PYZus{}countries}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{literal\PYZus{}eval}\PY{p}{)}
+        \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{production\PYZus{}countries}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{production\PYZus{}countries}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{[}\PY{n}{i}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]} \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n+nb}{list}\PY{p}{)} \PY{k}{else} \PY{p}{[}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{countries\PYZus{}chart} \PY{o}{=} \PY{n}{dataset}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{production\PYZus{}countries}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{level} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{drop} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{countries\PYZus{}chart}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{countries}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{country\PYZus{}dataset} \PY{o}{=} \PY{n}{dataset}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{production\PYZus{}countries}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{countries\PYZus{}chart}\PY{p}{)}
+        \PY{n}{country\PYZus{}dataset} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{country\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{countries}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{country\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{country}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{country\PYZus{}dataset}\PY{o}{.}\PY{n}{index}
+        \PY{n}{country\PYZus{}dataset}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Movies}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Country}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        \PY{n}{country\PYZus{}dataset} \PY{o}{=} \PY{n}{country\PYZus{}dataset}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{country\PYZus{}dataset}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}    Total Movies                   Country
+        0         21153  United States of America
+        1          4094            United Kingdom
+        2          3940                    France
+        3          2254                   Germany
+        4          2169                     Italy
+        5          1765                    Canada
+        6          1648                     Japan
+        7           964                     Spain
+        8           912                    Russia
+        9           828                     India
+\end{Verbatim}
+            
+    These are the Top 10 countries where movies are produced. Lets check
+this in a more visual environment.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{type} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{choropleth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{n}{locations} \PY{o}{=} \PY{n}{country\PYZus{}dataset}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                \PY{n}{locationmode} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country names}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{n}{z} \PY{o}{=} \PY{n}{country\PYZus{}dataset}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Movies}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                \PY{n}{text} \PY{o}{=} \PY{n}{country\PYZus{}dataset}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                \PY{n}{colorscale} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rgb(255, 255, 255)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rgb(0, 0, 255)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                \PY{n}{autocolorscale} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,}
+                \PY{n}{reversescale} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,}
+                \PY{n}{marker} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+                    \PY{n}{line} \PY{o}{=} \PY{n+nb}{dict} \PY{p}{(}
+                        \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rgb(180,180,180)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{n}{width} \PY{o}{=} \PY{l+m+mf}{0.5}
+                    \PY{p}{)} \PY{p}{)}\PY{p}{,}
+                \PY{n}{colorbar} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+                    \PY{n}{autotick} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,}
+                    \PY{n}{tickprefix} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                    \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Production Countries}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+              \PY{p}{)} \PY{p}{]}
+        
+        \PY{n}{layout} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+            \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Production Countries for the MovieLens Movies}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{n}{geo} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+                \PY{n}{showframe} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,}
+                \PY{n}{showcoastlines} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,}
+                \PY{n}{projection} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+                    \PY{n+nb}{type} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mercator}\PY{l+s+s1}{\PYZsq{}}
+                \PY{p}{)}
+            \PY{p}{)}
+        \PY{p}{)}
+        
+        \PY{n}{fig} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{layout} \PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(} \PY{n}{fig}\PY{p}{,} \PY{n}{validate}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{filename}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d3\PYZhy{}world\PYZhy{}map}\PY{l+s+s1}{\PYZsq{}} \PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    
+    \begin{verbatim}
+<Figure size 432x288 with 0 Axes>
+    \end{verbatim}
+
+    
+    \textbf{Franchise Movies} Let's take a brief look at franchise movies.
+Here are the Top 10 Highest Grossing Movie Franchise
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{dataset} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{n}{dataset}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{belongs\PYZus{}to\PYZus{}collection}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{notnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+         \PY{n}{dataset}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{belongs\PYZus{}to\PYZus{}collection}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{belongs\PYZus{}to\PYZus{}collection}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{literal\PYZus{}eval}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n+nb}{dict}\PY{p}{)} \PY{k}{else} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{)}
+         \PY{n}{dataset} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{n}{dataset}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{belongs\PYZus{}to\PYZus{}collection}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{notnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+         \PY{n}{franchise\PYZus{}pivot} \PY{o}{=} \PY{n}{dataset}\PY{o}{.}\PY{n}{pivot\PYZus{}table}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{belongs\PYZus{}to\PYZus{}collection}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{values}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{revenue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{aggfunc}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{revenue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         \PY{n}{franchise\PYZus{}pivot}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}                     belongs\_to\_collection  count          mean           sum
+         552               Harry Potter Collection      8  9.634209e+08  7.707367e+09
+         1160                 Star Wars Collection      8  9.293118e+08  7.434495e+09
+         646                 James Bond Collection     26  2.733450e+08  7.106970e+09
+         1317  The Fast and the Furious Collection      8  6.406373e+08  5.125099e+09
+         968   Pirates of the Caribbean Collection      5  9.043154e+08  4.521577e+09
+         1550              Transformers Collection      5  8.732202e+08  4.366101e+09
+         325              Despicable Me Collection      4  9.227676e+08  3.691070e+09
+         1491              The Twilight Collection      5  6.684215e+08  3.342107e+09
+         610                    Ice Age Collection      5  6.433417e+08  3.216709e+09
+         666              Jurassic Park Collection      4  7.578710e+08  3.031484e+09
+\end{Verbatim}
+            
+    The \textbf{Harry Potter} Franchise is the most successful movie
+franchise raking in more than 7.707 billion dollars from 8 movies. The
+\textbf{Star Wars} Movies come in a close second with a 7.403 billion
+dollars from 8 movies too. \textbf{James Bond} is third but the
+franchise has significantly more movies compared to the others in the
+list and therefore, a much smaller average gross.
+
+    Now we will see the average gross per movie to evaluate the success of a
+movie. These are absolute values and are not adjusted for inflation
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{franchise\PYZus{}pivot}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mean}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}                     belongs\_to\_collection  count          mean           sum
+         112                     Avatar Collection      1  2.787965e+09  2.787965e+09
+         1245              The Avengers Collection      2  1.462481e+09  2.924962e+09
+         479                     Frozen Collection      1  1.274219e+09  1.274219e+09
+         446               Finding Nemo Collection      2  9.844532e+08  1.968906e+09
+         1352                The Hobbit Collection      3  9.785078e+08  2.935523e+09
+         1388     The Lord of the Rings Collection      3  9.721816e+08  2.916545e+09
+         552               Harry Potter Collection      8  9.634209e+08  7.707367e+09
+         1160                 Star Wars Collection      8  9.293118e+08  7.434495e+09
+         325              Despicable Me Collection      4  9.227676e+08  3.691070e+09
+         968   Pirates of the Caribbean Collection      5  9.043154e+08  4.521577e+09
+\end{Verbatim}
+            
+    Intrestingly Avatar is still the top grossing movie franchise but Harry
+Potter also appears in this list. Indicating its movies were also
+successfull.
+
+    How about longest running movie franchise. Lets see those as well
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{franchise\PYZus{}pivot}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:}                        belongs\_to\_collection  count          mean  \textbackslash{}
+         646                    James Bond Collection     26  2.733450e+08   
+         473               Friday the 13th Collection     12  3.874155e+07   
+         976                       Pokémon Collection     11  6.348189e+07   
+         552                  Harry Potter Collection      8  9.634209e+08   
+         540                     Halloween Collection      8  3.089601e+07   
+         29      A Nightmare on Elm Street Collection      8  4.544894e+07   
+         1317     The Fast and the Furious Collection      8  6.406373e+08   
+         1432  The Pink Panther (Original) Collection      8  2.055978e+07   
+         1160                    Star Wars Collection      8  9.293118e+08   
+         977                Police Academy Collection      7  4.352046e+07   
+         
+                        sum  
+         646   7.106970e+09  
+         473   4.648985e+08  
+         976   6.983008e+08  
+         552   7.707367e+09  
+         540   2.471681e+08  
+         29    3.635916e+08  
+         1317  5.125099e+09  
+         1432  1.644782e+08  
+         1160  7.434495e+09  
+         977   3.046432e+08  
+\end{Verbatim}
+            
+    James Bond Collection as 26 movies in total. That's quite a lot of 007.
+It makes sense it has iterating itself for ages now.
+
+    Now let's check the most successful Production Houses. Along with that
+let's sort out the languages spoken column as well
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{spoken\PYZus{}languages}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{spoken\PYZus{}languages}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{literal\PYZus{}eval}\PY{p}{)}
+         \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{spoken\PYZus{}languages}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{spoken\PYZus{}languages}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{[}\PY{n}{i}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]} \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n+nb}{list}\PY{p}{)} \PY{k}{else} \PY{p}{[}\PY{p}{]}\PY{p}{)}
+         \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{production\PYZus{}companies}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{production\PYZus{}companies}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{literal\PYZus{}eval}\PY{p}{)}
+         \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{production\PYZus{}companies}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{production\PYZus{}companies}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{[}\PY{n}{i}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]} \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n+nb}{list}\PY{p}{)} \PY{k}{else} \PY{p}{[}\PY{p}{]}\PY{p}{)}
+         \PY{n}{companies} \PY{o}{=} \PY{n}{dataset}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{production\PYZus{}companies}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{level} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{drop} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{companies}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{companies}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{companies\PYZus{}dataset} \PY{o}{=} \PY{n}{dataset}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{production\PYZus{}companies}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{companies}\PY{p}{)}
+         \PY{n}{companies\PYZus{}sum} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{companies\PYZus{}dataset}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{companies}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revenue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+         \PY{n}{companies\PYZus{}sum}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{companies\PYZus{}average} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{companies\PYZus{}dataset}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{companies}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revenue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+         \PY{n}{companies\PYZus{}average}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Avergae}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{companies\PYZus{}count} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{companies\PYZus{}dataset}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{companies}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revenue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+         \PY{n}{companies\PYZus{}count}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{companies\PYZus{}chart} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{(}\PY{n}{companies\PYZus{}sum}\PY{p}{,} \PY{n}{companies\PYZus{}average}\PY{p}{,} \PY{n}{companies\PYZus{}count}\PY{p}{)}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{companies\PYZus{}chart}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:}                                                Total       Avergae  Count
+         Warner Bros.                            2.996449e+10  2.583145e+08    116
+         Universal Pictures                      2.818461e+10  2.027670e+08    139
+         Paramount Pictures                      2.514437e+10  2.149091e+08    117
+         Twentieth Century Fox Film Corporation  2.445885e+10  2.397926e+08    102
+         Walt Disney Pictures                    2.276148e+10  3.793580e+08     60
+         Columbia Pictures                       1.573690e+10  2.622817e+08     60
+         New Line Cinema                         1.402071e+10  1.974747e+08     71
+         Marvel Studios                          1.084600e+10  7.747146e+08     14
+         Amblin Entertainment                    9.913742e+09  3.812978e+08     26
+         Lucasfilm                               9.657704e+09  6.438469e+08     15
+\end{Verbatim}
+            
+    Warner Bros.~has the highest earning over all other companies. Now let's
+see which movies were way expensive to produce. It could be interesting
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{dataset}\PY{p}{[}\PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{budget}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{notnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{budget}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revenue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{return}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{budget}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:}                                              title       budget       revenue  \textbackslash{}
+         17124  Pirates of the Caribbean: On Stranger Tides  380000000.0  1.045714e+09   
+         11827     Pirates of the Caribbean: At World's End  300000000.0  9.610000e+08   
+         26558                      Avengers: Age of Ultron  280000000.0  1.405404e+09   
+         11067                             Superman Returns  270000000.0  3.910812e+08   
+         44842                Transformers: The Last Knight  260000000.0  6.049421e+08   
+         16130                                      Tangled  260000000.0  5.917949e+08   
+         11780                                 Spider-Man 3  258000000.0  8.908716e+08   
+         25390    The Hobbit: The Battle of the Five Armies  250000000.0  9.560198e+08   
+         31072           Batman v Superman: Dawn of Justice  250000000.0  8.732602e+08   
+         19971            The Hobbit: An Unexpected Journey  250000000.0  1.021104e+09   
+         
+                  return  year  
+         17124  2.751878  2011  
+         11827  3.203333  2007  
+         26558  5.019299  2015  
+         11067  1.448449  2006  
+         44842  2.326701  2017  
+         16130  2.276134  2010  
+         11780  3.452991  2007  
+         25390  3.824079  2014  
+         31072  3.493041  2016  
+         19971  4.084414  2012  
+\end{Verbatim}
+            
+    Pirates of the Caribbean has a staggering 380 million dollar budget. It
+also takes the second spot at 300 million dollars Let's glance over the
+top grossing movies of all time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{top\PYZus{}grossing} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{poster\PYZus{}path}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{budget}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revenue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{revenue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{top\PYZus{}grossing} \PY{o}{=} \PY{n}{top\PYZus{}grossing}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}colwidth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{HTML}\PY{p}{(}\PY{n}{top\PYZus{}grossing}\PY{o}{.}\PY{n}{to\PYZus{}html}\PY{p}{(}\PY{n}{escape} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+            
+    Now on towards the focus of the project. First lets define all the
+objects we are going to use
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}colwidth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{def} \PY{n+nf}{build\PYZus{}chart}\PY{p}{(}\PY{n}{genre}\PY{p}{,} \PY{n}{percentile} \PY{o}{=} \PY{l+m+mf}{0.85}\PY{p}{)}\PY{p}{:}
+         	\PY{n}{df} \PY{o}{=} \PY{n}{genre\PYZus{}database}\PY{p}{[}\PY{n}{genre\PYZus{}database}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{genre}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{n}{genre}\PY{p}{]}
+         	\PY{n}{vote\PYZus{}counts} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{notnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         	\PY{n}{vote\PYZus{}averages} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}average}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{notnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}average}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         	\PY{n}{C} \PY{o}{=} \PY{n}{vote\PYZus{}averages}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         	\PY{n}{m} \PY{o}{=} \PY{n}{vote\PYZus{}counts}\PY{o}{.}\PY{n}{quantile}\PY{p}{(}\PY{n}{percentile}\PY{p}{)}
+         	\PY{n}{qualified} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{m}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{notnull}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}average}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{notnull}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}average}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{popularity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+         	\PY{n}{qualified}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{qualified}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         	\PY{n}{qualified}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}average}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{qualified}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}average}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         	\PY{n}{qualified}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{qualified}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vote\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{/}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vote\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{+}\PY{n}{m}\PY{p}{)} \PY{o}{*} \PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vote\PYZus{}average}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{n}{m}\PY{o}{/}\PY{p}{(}\PY{n}{m}\PY{o}{+}\PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vote\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{C}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         	\PY{n}{qualified} \PY{o}{=} \PY{n}{qualified}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wr}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{250}\PY{p}{)}
+         	\PY{k}{return} \PY{n}{qualified}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}director}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+         	\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{:}
+         		\PY{k}{if} \PY{n}{i}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{job}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Director}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+         			\PY{k}{return} \PY{n}{i}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         	\PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{nan}
+         
+         \PY{k}{def} \PY{n+nf}{filter\PYZus{}keywords}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+         	\PY{n}{words} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         	\PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{:}
+         		\PY{k}{if} \PY{n}{i} \PY{o+ow}{in} \PY{n}{keywords\PYZus{}dataset}\PY{p}{:}
+         			\PY{n}{words}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+         	\PY{k}{return} \PY{n}{words}
+         
+         \PY{k}{def} \PY{n+nf}{convert\PYZus{}int}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+         	\PY{k}{try}\PY{p}{:}
+         		\PY{k}{return} \PY{n+nb}{int}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         	\PY{k}{except}\PY{p}{:}
+         		\PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{nan}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}recommendations}\PY{p}{(}\PY{n}{title}\PY{p}{)}\PY{p}{:}
+             \PY{n}{idx} \PY{o}{=} \PY{n}{indices}\PY{p}{[}\PY{n}{title}\PY{p}{]}
+             \PY{n}{simulate\PYZus{}scores} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{cosine\PYZus{}sim}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{n}{simulate\PYZus{}scores} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{simulate\PYZus{}scores}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{reverse}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{simulate\PYZus{}scores} \PY{o}{=} \PY{n}{simulate\PYZus{}scores}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{31}\PY{p}{]}
+             \PY{n}{movie\PYZus{}indices} \PY{o}{=} \PY{p}{[}\PY{n}{i}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{simulate\PYZus{}scores}\PY{p}{]}
+             \PY{k}{return} \PY{n}{titles}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{movie\PYZus{}indices}\PY{p}{]}
+         
+         \PY{k}{def} \PY{n+nf}{hybrid}\PY{p}{(}\PY{n}{username}\PY{p}{,} \PY{n}{SELECTED}\PY{p}{)}\PY{p}{:}
+         	\PY{n}{idx} \PY{o}{=} \PY{n}{indices}\PY{p}{[}\PY{n}{SELECTED}\PY{p}{]}
+         	\PY{n}{tmdbId} \PY{o}{=} \PY{n}{id\PYZus{}map}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{SELECTED}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         	\PY{n}{movie\PYZus{}id} \PY{o}{=} \PY{n}{id\PYZus{}map}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{SELECTED}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{movieId}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         	\PY{n}{simulate\PYZus{}scores} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{cosine\PYZus{}sim}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{idx}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         	\PY{n}{simulate\PYZus{}scores} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{simulate\PYZus{}scores}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         	\PY{n}{simulate\PYZus{}scores} \PY{o}{=} \PY{n}{simulate\PYZus{}scores}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{26}\PY{p}{]}
+         	\PY{n}{movies} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{movie\PYZus{}indices}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}average}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+         	\PY{n}{movies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{estimate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{movies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{svd}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{username}\PY{p}{,} \PY{n}{indices\PYZus{}map}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{movieId}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{est}\PY{p}{)}
+         	\PY{n}{movies} \PY{o}{=} \PY{n}{movies}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{estimate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         	\PY{k}{return} \PY{n}{movies}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{genres}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{genres}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{literal\PYZus{}eval}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{[}\PY{n}{i}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]} \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n+nb}{list}\PY{p}{)} \PY{k}{else} \PY{p}{[}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} Cleaning the genre column}
+         
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{We are going to use IMDB weighted average formula to score average ratings for a movie}
+         \PY{l+s+sd}{	link \PYZhy{}\PYZgt{} https://help.imdb.com/article/imdb/track\PYZhy{}movies\PYZhy{}tv/faq\PYZhy{}for\PYZhy{}imdb\PYZhy{}ratings/G67Y87TFYYP6TWAV\PYZsh{}}
+         \PY{l+s+sd}{	Formula: Weighted Rating (WR) = ((v/v+m)R) + ((m/v+m)C)}
+         \PY{l+s+sd}{	v = number of votes for movies}
+         \PY{l+s+sd}{	m = minimum votes required}
+         \PY{l+s+sd}{	R = Average movie rating}
+         \PY{l+s+sd}{	C = Overall Average vote}
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{n}{genre\PYZus{}chart} \PY{o}{=} \PY{n}{dataset}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{genres}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{level} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{drop} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{genre\PYZus{}chart}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{genre}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{genre\PYZus{}database} \PY{o}{=} \PY{n}{dataset}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{genres}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{genre\PYZus{}chart}\PY{p}{)}
+         
+         \PY{n}{keywords}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{keywords}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Making id column as int}
+         \PY{n}{credit}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{credit}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Making id column as int}
+         \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Making id column as int}
+         \PY{n}{dataset} \PY{o}{=} \PY{n}{dataset}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{credit}\PY{p}{,} \PY{n}{on} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Merging credit dataset with original dataset}
+         \PY{n}{dataset} \PY{o}{=} \PY{n}{dataset}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{keywords}\PY{p}{,} \PY{n}{on} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Merfing keywords dataset with original dataset}
+         \PY{n}{linked\PYZus{}dataset} \PY{o}{=} \PY{n}{dataset}\PY{p}{[}\PY{n}{dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{links}\PY{p}{)}\PY{p}{]} \PY{c+c1}{\PYZsh{} Creating a new dataframe}
+         \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cast}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cast}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{literal\PYZus{}eval}\PY{p}{)} \PY{c+c1}{\PYZsh{} Cleaning cast}
+         \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{crew}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{crew}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{literal\PYZus{}eval}\PY{p}{)} \PY{c+c1}{\PYZsh{} Cleaning crew}
+         \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keywords}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keywords}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{literal\PYZus{}eval}\PY{p}{)} \PY{c+c1}{\PYZsh{} Cleaning keywords}
+         \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cast\PYZus{}size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cast}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Getting length on crew}
+         \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{crew\PYZus{}size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{crew}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Getting length of cast}
+         \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{director}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{crew}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}director}\PY{p}{)} \PY{c+c1}{\PYZsh{} getting directors name}
+         \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cast}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cast}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{[}\PY{n}{i}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]} \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n+nb}{list}\PY{p}{)} \PY{k}{else} \PY{p}{[}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} Getting other cast members}
+         \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cast}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cast}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]} \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{3} \PY{k}{else} \PY{n}{x}\PY{p}{)} \PY{c+c1}{\PYZsh{} Limiting cast to 3 main people}
+         \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keywords}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keywords}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{[}\PY{n}{i}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]} \PY{k}{if} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n+nb}{list}\PY{p}{)} \PY{k}{else} \PY{p}{[}\PY{p}{]}\PY{p}{)} 
+\end{Verbatim}
+
+
+    The above code is just a cleaning \& merging code. But it is
+computationally heavy. And requires some time and power. Now we define a
+search box to select our movie over which our recommendations will be on
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{searchable} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+         \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+             \PY{n}{userselection} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZgt{}\PYZgt{}  Enter the name of the movie you want the Recommendations on: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{search} \PY{o}{=} \PY{n}{searchable}\PY{p}{[}\PY{n}{searchable}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{n}{userselection}\PY{p}{,} \PY{n}{case} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,} \PY{n}{na} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,} \PY{n}{regex} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{]}
+             \PY{n+nb}{print} \PY{p}{(}\PY{n}{search}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+             \PY{n}{correct\PYZus{}search} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ \PYZgt{}\PYZgt{} Correct Search? [y]/n: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+             \PY{k}{if} \PY{n}{correct\PYZus{}search} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n}\PY{l+s+s2}{\PYZdq{}} \PY{o+ow}{or} \PY{n}{correct\PYZus{}search} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{N}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+             	\PY{k}{continue}
+             \PY{k}{elif} \PY{n}{correct\PYZus{}search} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}} \PY{o+ow}{or} \PY{n}{correct\PYZus{}search} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+             	\PY{k}{break}
+             \PY{k}{elif} \PY{n+ne}{ValueError}\PY{p}{:}
+             	\PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Invalid Input}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             	\PY{k}{continue}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Something seems wrong}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{k}{continue}
+         
+         \PY{n}{selected\PYZus{}movie} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{selection} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZgt{}\PYZgt{}  Enter the }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ID}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ of the movie selected: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{selection\PYZus{}data} \PY{o}{=} \PY{n}{selected\PYZus{}movie}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{selection}\PY{p}{]}
+         \PY{n}{SELECTED} \PY{o}{=} \PY{n}{selection\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{GENRE} \PY{o}{=} \PY{n}{selection\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{genres}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{GENRE} \PY{o}{=} \PY{n}{GENRE}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+>>  Enter the name of the movie you want the Recommendations on: dark kn
+          id                                    title
+1712     155                          The Dark Knight
+2253   49026                    The Dark Knight Rises
+2404  123025  Batman: The Dark Knight Returns, Part 1
+2447  142061  Batman: The Dark Knight Returns, Part 2
+
+ >> Correct Search? [y]/n: y
+
+>>  Enter the 'ID' of the movie selected: 155
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{build\PYZus{}chart}\PY{p}{(}\PY{n}{GENRE}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:}                           title  year  vote\_count  vote\_average popularity  \textbackslash{}
+         12481           The Dark Knight  2008       12269             8    123.167   
+         834               The Godfather  1972        6024             8    41.1093   
+         359               The Lion King  1994        5520             8    21.6058   
+         586    The Silence of the Lambs  1991        4549             8    4.30722   
+         1178     The Godfather: Part II  1974        3418             8    36.6293   
+         1176                     Psycho  1960        2405             8    36.8263   
+         9430                     Oldboy  2003        2000             8    10.6169   
+         2616              The 400 Blows  1959         363             8    7.26869   
+         18252     The Dark Knight Rises  2012        9263             7    20.5826   
+         10122             Batman Begins  2005        7511             7    28.5053   
+         
+                      wr  
+         12481  7.946140  
+         834    7.892977  
+         359    7.883714  
+         586    7.860442  
+         1178   7.818022  
+         1176   7.749945  
+         9430   7.705969  
+         2616   6.983146  
+         18252  6.960879  
+         10122  6.952108  
+\end{Verbatim}
+            
+    The movies above are the top 10 from the genre of the movie. As we can
+see the movie set as input has appeared in the charts. So we need to
+tweak this code a bit to get better recomendations. Here are the details
+of the movie selected
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{poster} \PY{o}{=} \PY{n}{selection\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{poster\PYZus{}path}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{HTML}\PY{p}{(}\PY{n}{poster}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Movie Selected: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{selection\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Original Title: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{selection\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{original\PYZus{}title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Director: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{selection\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{director}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Actors: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{selection\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cast}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Genre: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{selection\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{genres}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Release: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{selection\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{release\PYZus{}date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Tagline: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{selection\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tagline}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Description: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{selection\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{overview}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Run\PYZhy{}Time: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{selection\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{runtime}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{min}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Budget: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{selection\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{budget}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Spoken Language(s): }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{selection\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{spoken\PYZus{}languages}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Language: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{selection\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{original\PYZus{}language}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+----------------------------------------------
+
+
+
+Movie Selected:  The Dark Knight
+
+Original Title:  The Dark Knight
+
+Director:  Christopher Nolan
+
+Actors:  ['Christian Bale', 'Michael Caine', 'Heath Ledger']
+
+Genre:  ['Drama', 'Action', 'Crime', 'Thriller']
+Release:  2008-07-16
+
+Tagline:  Why So Serious?
+
+Description: 
+ Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective, but they soon find themselves prey to a reign of chaos unleashed by a rising criminal mastermind known to the terrified citizens of Gotham as the Joker.
+
+Run-Time:  152.0 min
+Budget:  185000000.0
+Spoken Language(s):  ['English', '普通话']
+Language:  en
+-----------------------------------------------
+
+    \end{Verbatim}
+
+    Now let's build a better recommendation engine. The one above was purely
+based on genre type and that to not very accurate.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cast}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=}  \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cast}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{[}\PY{n+nb}{str}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{n}{i}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} Lowering case and removing spaces}
+         \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{director}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{director}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{[}\PY{n}{x}\PY{p}{,}\PY{n}{x}\PY{p}{,}\PY{n}{x}\PY{p}{]}\PY{p}{)}
+         \PY{n}{keywords\PYZus{}dataset} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keywords}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{level} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{drop} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{keywords\PYZus{}dataset}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keyword}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{keywords\PYZus{}dataset} \PY{o}{=} \PY{n}{keywords\PYZus{}dataset}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+         \PY{n}{keywords\PYZus{}dataset} \PY{o}{=} \PY{n}{keywords\PYZus{}dataset}\PY{p}{[}\PY{n}{keywords\PYZus{}dataset} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{stemmer} \PY{o}{=} \PY{n}{SnowballStemmer}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{english}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Setting stemmer languge to english; it converts plural to singular}
+         \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keywords}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keywords}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{filter\PYZus{}keywords}\PY{p}{)}
+         \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keywords}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keywords}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{[}\PY{n}{stemmer}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}\PY{p}{)}
+         \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keywords}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keywords}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{[}\PY{n+nb}{str}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{n}{i}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    The code above is sorting and cleaning the columns for keywords. The
+bottom one is combing different sets of data (from movie description,
+keywords, cast \& crew. These will be used in making the final model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{combine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keywords}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{+} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cast}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{+} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{director}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{+} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{genres}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{combine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{combine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Vectorizing}
+         \PY{n}{count} \PY{o}{=} \PY{n}{CountVectorizer}\PY{p}{(}\PY{n}{analyzer} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{word}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ngram\PYZus{}range} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n}{min\PYZus{}df} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{stop\PYZus{}words} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{english}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{count\PYZus{}matrix} \PY{o}{=} \PY{n}{count}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{combine}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{cosine\PYZus{}sim} \PY{o}{=} \PY{n}{cosine\PYZus{}similarity}\PY{p}{(}\PY{n}{count\PYZus{}matrix}\PY{p}{,} \PY{n}{count\PYZus{}matrix}\PY{p}{)}
+         
+         \PY{n}{linked\PYZus{}dataset} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         \PY{n}{titles} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{indices} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{linked\PYZus{}dataset}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{index} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    Now that all the pieces are set. We are ready to make our prediction
+model and implement on the movie selected. We are not setting up our
+prediction model veriables. Reader \& SVD are part of the ``surprise''
+package from scikit which is specially developed for recommendation
+models. They learn the data to provide an optimum match. It does that by
+calculating \textbf{Root Mean Square Value (RMSE)}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{reader} \PY{o}{=} \PY{n}{Reader}\PY{p}{(}\PY{p}{)} 
+         \PY{n}{data} \PY{o}{=} \PY{n}{Dataset}\PY{o}{.}\PY{n}{load\PYZus{}from\PYZus{}df}\PY{p}{(}\PY{n}{ratings}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{userId}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{movieId}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{reader}\PY{p}{)} 
+         \PY{n}{data}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{n\PYZus{}folds} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{)} 
+         \PY{n}{svd} \PY{o}{=} \PY{n}{SVD}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{evaluate}\PY{p}{(}\PY{n}{svd}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{measures} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RMSE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MAE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Evaluating RMSE, MAE of algorithm SVD.
+
+------------
+Fold 1
+RMSE: 0.8980
+MAE:  0.6932
+------------
+Fold 2
+RMSE: 0.9018
+MAE:  0.6939
+------------
+Fold 3
+RMSE: 0.8925
+MAE:  0.6878
+------------
+Fold 4
+RMSE: 0.8940
+MAE:  0.6885
+------------
+Fold 5
+RMSE: 0.8916
+MAE:  0.6859
+------------
+------------
+Mean RMSE: 0.8956
+Mean MAE : 0.6899
+------------
+------------
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} CaseInsensitiveDefaultDict(list,
+                                    \{'rmse': [0.8979993077083833,
+                                      0.9018185849975392,
+                                      0.8925166565974512,
+                                      0.8940297570018944,
+                                      0.8916102594545502],
+                                     'mae': [0.6931717830720076,
+                                      0.6939197544789029,
+                                      0.6878058802188277,
+                                      0.6885227335667062,
+                                      0.6859160869542368]\})
+\end{Verbatim}
+            
+    The RMSE value is about 90\% which is pretty good for a early stage
+recommendation model. Now let's train our dataset
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{trainset} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{build\PYZus{}full\PYZus{}trainset}\PY{p}{(}\PY{p}{)}
+         \PY{n}{svd}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{trainset}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} <surprise.prediction\_algorithms.matrix\_factorization.SVD at 0x1dd0a8f3cc0>
+\end{Verbatim}
+            
+    Now that our model is ready. We need to implement the last piece of the
+puzzle. The user id. For this case I have made some usernames of which
+can be used for testing this code. If a user doesn't exist in the dict.
+It will temporarily create one and destroy it at the end of the
+execution.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{usernames} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Carlo}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Andy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rushabh}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Alkim}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{40}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Aashna}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{50}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Anurag}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{60}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nikhil}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{70}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nishit}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{80}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Prayash}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{90}\PY{p}{\PYZcb{}}
+         \PY{n}{username} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Enter Username: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{username} \PY{o}{=} \PY{n}{username}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{p}{)}
+         \PY{k}{if} \PY{n}{username} \PY{o+ow}{in} \PY{n}{usernames}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Username = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{username}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Unique No}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{usernames}\PY{p}{[}\PY{n}{username}\PY{p}{]}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+             \PY{n}{UniqueID} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{usernames}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{10}
+             \PY{n}{usernames}\PY{p}{[}\PY{n}{username}\PY{p}{]} \PY{o}{=} \PY{n}{UniqueID}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{New User: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Username: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{username}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{User Number: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{UniqueID}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Enter Username: 
+carlo
+Username =  Carlo 
+Unique No 10
+
+    \end{Verbatim}
+
+    Our username and movie are set. Now let us import both of them in the
+prediction model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{id\PYZus{}map} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{links\PYZus{}small.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{movieId}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tmdbId}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{id\PYZus{}map}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tmdbId}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{id\PYZus{}map}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tmdbId}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{convert\PYZus{}int}\PY{p}{)}
+         \PY{n}{id\PYZus{}map}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{movieId}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{id\PYZus{}map} \PY{o}{=} \PY{n}{id\PYZus{}map}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{linked\PYZus{}dataset}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{on} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{indices\PYZus{}map} \PY{o}{=} \PY{n}{id\PYZus{}map}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{idp} \PY{o}{=} \PY{n}{indices}\PY{p}{[}\PY{n}{SELECTED}\PY{p}{]}
+         \PY{n}{sim\PYZus{}scores} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{cosine\PYZus{}sim}\PY{p}{[}\PY{n}{idp}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sim\PYZus{}scores} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{sim\PYZus{}scores}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{sim\PYZus{}scores} \PY{o}{=} \PY{n}{sim\PYZus{}scores}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{26}\PY{p}{]}
+         \PY{n}{movie\PYZus{}indices} \PY{o}{=} \PY{p}{[}\PY{n}{i}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{sim\PYZus{}scores}\PY{p}{]}
+         \PY{n}{movies} \PY{o}{=} \PY{n}{linked\PYZus{}dataset}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{movie\PYZus{}indices}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vote\PYZus{}average}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+         
+         \PY{n}{hybrid}\PY{p}{(}\PY{n}{username}\PY{p}{,} \PY{n}{SELECTED}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:}                                      title  vote\_count  vote\_average  year  \textbackslash{}
+         1389                              Kick-Ass      4747.0           7.1  2010   
+         1138                         Batman Begins      7511.0           7.5  2005   
+         1469                 The Dark Knight Rises      9263.0           7.6  2012   
+         518                            El Mariachi       243.0           6.6  1992   
+         1595    Mission: Impossible - Rogue Nation      3274.0           7.1  2015   
+         1070                    Gone in 60 Seconds        40.0           6.5  1974   
+         1575  Paranormal Activity: The Marked Ones       455.0           5.2  2014   
+         419                               Superman      1042.0           6.9  1978   
+         190                             Young Guns       262.0           6.6  1988   
+         1559                            Kick-Ass 2      2275.0           6.3  2013   
+         
+                   id  estimate  
+         1389   23483  3.856294  
+         1138     272  3.847214  
+         1469   49026  3.775276  
+         518     9367  3.724010  
+         1595  177677  3.707763  
+         1070   16246  3.577242  
+         1575  227348  3.469075  
+         419     1924  3.457161  
+         190    11967  3.455470  
+         1559   59859  3.452321  
+\end{Verbatim}
+            
+    The movie was set to ``The Dark Knight'' and username to ``Carlo''.
+These are the specific recommendations for him. Let's check for another
+user.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{hybrid}\PY{p}{(}\PY{l+m+mi}{800}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The Dark Knight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:}                                      title  vote\_count  vote\_average  year  \textbackslash{}
+         1389                              Kick-Ass      4747.0           7.1  2010   
+         1138                         Batman Begins      7511.0           7.5  2005   
+         1469                 The Dark Knight Rises      9263.0           7.6  2012   
+         518                            El Mariachi       243.0           6.6  1992   
+         1595    Mission: Impossible - Rogue Nation      3274.0           7.1  2015   
+         1070                    Gone in 60 Seconds        40.0           6.5  1974   
+         1575  Paranormal Activity: The Marked Ones       455.0           5.2  2014   
+         419                               Superman      1042.0           6.9  1978   
+         190                             Young Guns       262.0           6.6  1988   
+         1559                            Kick-Ass 2      2275.0           6.3  2013   
+         
+                   id  estimate  
+         1389   23483  3.856294  
+         1138     272  3.847214  
+         1469   49026  3.775276  
+         518     9367  3.724010  
+         1595  177677  3.707763  
+         1070   16246  3.577242  
+         1575  227348  3.469075  
+         419     1924  3.457161  
+         190    11967  3.455470  
+         1559   59859  3.452321  
+\end{Verbatim}
+            
+    For the same movie and different user the output has changed as per the
+user input. Some Movies are same that's due to the fact that the movies
+share some of the elements. The output also depends on what the user 100
+ratings' for the movie \emph{(The Dark Knight)} were.
+
+    The End
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
